@@ -25,7 +25,7 @@ main(_) ->
     Output = os:cmd("rebar3 edoc"), % build docs
     {match, _} = re:run(Output, "Running edoc"),
     Overview = ?DOCPATH "overview-summary.html",
-    Modules = filelib:wildcard(filename:join(?DOCPATH, "eflambe*.html")),
+    Modules = [filename:join(?DOCPATH, "eflambe.html")],
     [Pre,Post] = base(["index.html" | Modules]),
     [write(?SITEPATH,
            case File of
@@ -74,32 +74,31 @@ get_lines(Device) ->
         eof -> []
     end.
 
-base(Files) ->
-    Modules = [{filename:basename(F,".html"),
-                filename:basename(F)} || F <- Files],
-    [[<<"
+base(_Files) ->
+    [<<"
 <!DOCTYPE html>
 <html lang=\"en\">
   <head>
     <meta http-equiv=\"Content-Type\" content=\"text/html;charset=UTF-8\">
     <link rel=\"stylesheet\" href=\"screen.css\" media=\"screen, projection\" />
-    <title>eFlambè</title>
+    <title>eFlamb</title>
   </head>
   <body>
     <header>
         <h1>eFlambè</h1>
         <nav>
           <ul>
-">>,
-[["<li><a href=\"", Path, "\">", Name, "</a>"] || {Name,Path} <- Modules],
-"
+            <li><a href=\"index.html\">Home</a></li>
+            <li><a href=\"eflambe.html\">eFlambè API</a></li>
+            <li><a href=\"https://github.com/Stratus3D/eflambe\">GitHub</a></li>
           </ul>
         </nav>
     </header>
-    <article>
-    "],
-"
-    </article>
+    <article>">>,
+"    </article>
+     <div>
+        <p>Copyright © 2021 Trevor Brown (Apache-2.0 License)</p>
+     </div>
   </body>
 </html>
 "].
