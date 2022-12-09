@@ -16,7 +16,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: erlef/setup-beam@v1
         with:
-          otp-version: '23.2.4'
+          otp-version: '23.3.4.18'
           rebar3-version: '3.16.1'
       - run: rebar3 compile
   test:
@@ -27,7 +27,7 @@ jobs:
       - uses: erlef/setup-beam@v1
         with:
           version-type: 'strict'
-          otp-version: '23.2.4'
+          otp-version: '23.3.4.18'
           rebar3-version: '3.16.1'
       - run: rebar3 ct
   dialyzer:
@@ -38,7 +38,7 @@ jobs:
       - uses: erlef/setup-beam@v1
         with:
           version-type: 'strict'
-          otp-version: '23.2.4'
+          otp-version: '23.3.4.18'
           rebar3-version: '3.16.1'
       - run: rebar3 dialyzer
   lint:
@@ -49,6 +49,6 @@ jobs:
       - uses: erlef/setup-beam@v1
         with:
           version-type: 'strict'
-          otp-version: '23.2.4'
+          otp-version: '23.3.4.18'
           rebar3-version: '3.16.1'
       - run: rebar3 lint
